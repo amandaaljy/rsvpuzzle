@@ -51,6 +51,27 @@ def decode_a1z26(code):
 
 def semaphore_visual_input():
     import itertools
+    # CSS to support grid-like button layout
+    st.markdown("""
+        <style>
+        .semaphore-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 50px);
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .semaphore-grid .stCheckbox>div {
+            transform: scale(1.5);
+            transform-origin: center;
+        }
+
+        label[data-testid="stCheckboxLabel"] {
+            display: none;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
     # Define valid positions (excluding center)
     positions = {
@@ -103,22 +124,37 @@ def semaphore_visual_input():
     st.button("Reset", on_click=reset_semaphore_state)
 
 def braille_visual_input():
-    # CSS to enlarge and tighten checkboxes
     st.markdown("""
         <style>
-        .stCheckbox>div {
-            transform: scale(2.0);
-            transform-origin: center left;
-            margin-bottom: -15px;
+        .braille-grid {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 180px;
+            margin: 0 auto 16px auto;
+            justify-content: center;
+            gap: 10px;
         }
+
+        .braille-grid .stCheckbox {
+            width: 40px;
+            height: 40px;
+        }
+
+        .braille-grid .stCheckbox>div {
+            transform: scale(1.8);
+            transform-origin: center;
+        }
+
         label[data-testid="stCheckboxLabel"] {
             display: none;
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # Braille pattern: 3 rows × 2 columns
     bit_values = []
+    st.markdown('<div class="braille-grid">', unsafe_allow_html=True)
+
+    # Braille pattern: 3 rows × 2 columns
 
     for row in [(1, 4), (2, 5), (3, 6)]:
         col1, col2 = st.columns([1, 1], gap="small")
