@@ -72,7 +72,9 @@ def semaphore_visual_input():
         }
         </style>
     """, unsafe_allow_html=True)
-
+    
+    st.write(" For Semaphore, please use a desktop or view desktop site (on mobile)")
+    
     # Define valid positions (excluding center)
     positions = {
         1: 'Top Left',     2: 'Top Center',     3: 'Top Right',
@@ -90,7 +92,7 @@ def semaphore_visual_input():
                     st.markdown("⬛", unsafe_allow_html=True)  # Center blocked
                 else:
                     grid[idx] = st.checkbox("", key=f"sem_{idx}", label_visibility="collapsed")
-    st.write(" For Semaphore, please use a desktop or view desktop site (on mobile)")
+    
     # Collect selected positions
     selected = [idx for idx, checked in grid.items() if checked]
 
@@ -153,7 +155,9 @@ def braille_visual_input():
 
     bit_values = []
     st.markdown('<div class="braille-grid">', unsafe_allow_html=True)
+    
     st.write(" For Braille, please use a desktop or view desktop site (on mobile)")
+    
     # Braille pattern: 3 rows × 2 columns
 
     for row in [(1, 4), (2, 5), (3, 6)]:
